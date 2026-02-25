@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+echo "Jakoubek" | fold -w1 | nl -w1 -s' ' > slovo.txt
+tr 'A-Z' 'a-z' < slovo.txt > slovo_lower.txt
+sort -t';' -k2,2 slovo_lower.txt > slovo_sorted.txt
+sort -t';' -k1,1 hlaskovaci_abecdeda.txt > abecdeda_sorted.txt
+join -t';' -1 2 -2 1 slovo_sorted.txt abecdeda_sorted.txt > joined.txt
+sort -t';' -k2,2n joined.txt > final_sorted.txt
+
+cut -d';' -f3 final_sorted.txt
